@@ -1,0 +1,28 @@
+# Environment
+B_A/project/.env
+B_A/project/.env*
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+
+# IDE
+**/.vscode/
+**/.idea/
+
+# System
+**/.DS_Store
+**/Thumbs.db
+
+# Data/Models
+**/*.pkl
+**/*.h5
+**/*.bin
+**/data/
+**/models/
+
+# Logs
+**/*.log
+**/logs/
