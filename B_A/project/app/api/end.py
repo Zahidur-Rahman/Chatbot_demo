@@ -1,12 +1,19 @@
-from fastapi import APIRouter, Depends
-from app.services.llm import llm  # Import the initialized LLM
+from fastapi import APIRouter, Depends, HTTPException
+from app.services.rag import RAGService
+from pydantic import BaseModel
+from typing import Optional
 
 router = APIRouter()
+rag_service = RAGService()
 
-@router.post("/generate/")
-async def generate(prompt: str):
+class QueryRequest(BaseModel):
+    question: str
+    k: Optional[int] = 6# Optional parameter for number of chunks to retrieve
+
+@router.post("/query/")
+async def query(request: QueryRequest):
     try:
-        response = llm.invoke(prompt)
-        return {"response": response.content} # Access the text content
+        result = rag_service.query(request.question, k=request.k)
+        return result
     except Exception as e:
-        return {"error": f"LLM generation failed: {str(e)}"}
+        raise HTTPException(status_code=500, detail=str(e))

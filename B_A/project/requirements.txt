@@ -13,3 +13,5 @@ bitsandbytes
 huggingface-hub
 mistralai
 langchain_mistralai
+tenacity
+langchain-community[pdf]
